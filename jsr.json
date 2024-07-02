@@ -1,5 +1,8 @@
 {
     "name": "@ease-session/auth",
-    "version": "0.2.3",
-    "exports": "./index.ts"
+    "version": "0.2.4",
+    "exports": "./index.ts",
+    "exclude": [
+        "/example"
+    ]
 }
