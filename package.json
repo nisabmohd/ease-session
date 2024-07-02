@@ -1,8 +1,7 @@
 {
   "name": "ease-session",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "main": "index.ts",
-  "type": "module",
   "keywords": [
     "next.js",
     "session",

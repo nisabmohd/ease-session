@@ -2,11 +2,10 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers.js";
 import { NextRequest, NextResponse } from "next/server.js";
 import bcrypt from "bcryptjs";
-import "dotenv/config";
 
 function getEnvJwtSecret() {
   const haveAddedEnvSecret = !!process.env.JWT_SECRET;
-  if (haveAddedEnvSecret) {
+  if (!haveAddedEnvSecret) {
     throw new Error("`JWT_SECRET` key not found in .env file");
   }
   return new TextEncoder().encode(process.env.JWT_SECRET!);
