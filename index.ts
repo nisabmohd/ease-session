@@ -1,6 +1,6 @@
 import { SignJWT, jwtVerify } from "jose";
-import { cookies } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers.js";
+import { NextRequest, NextResponse } from "next/server.js";
 
 const haveAddedEnvSecret = !!process.env.JWT_SECRET;
 const JWTSECRET = new TextEncoder().encode(process.env.JWT_SECRET!);
@@ -52,7 +52,7 @@ export async function clearSession() {
   cookies().set("session", "", { expires: new Date(0) });
 }
 
-export async function getSession() {
+export async function getSession(): Promise<UserSession | null> {
   const session = cookies().get("session")?.value;
   if (!session) return null;
   if (!haveAddedEnvSecret)
@@ -60,7 +60,10 @@ export async function getSession() {
   return (await decrypt(session)) as UserSession | null;
 }
 
-export async function updateSession(req: NextRequest, options: sessionOptions) {
+export async function updateSession(
+  req: NextRequest,
+  options: sessionOptions
+): Promise<NextResponse<unknown> | null> {
   const session = req.cookies.get("session")?.value;
   if (!session) return null;
   if (!haveAddedEnvSecret)
