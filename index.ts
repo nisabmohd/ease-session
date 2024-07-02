@@ -106,11 +106,11 @@ export async function updateSession(
 
 /**
  * Verifies if a given value matches the hashed password.
- * @param hash The hashed password to compare against.
  * @param val The plain text value to compare with the hashed password.
+ * @param hash The hashed password to compare against.
  * @returns `true` if the plain text value matches the hashed password, otherwise `false`.
  */
-export function verifyPassword(hash: string, val: string): boolean {
+export function verifyPassword(val: string, hash: string): boolean {
   return bcrypt.compareSync(val, hash);
 }
 
