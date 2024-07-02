@@ -9,7 +9,8 @@ Initially add the `JWT_SECRET` key in `.env` file
 JWT_SECRET = xyz
 ```
 
-> [!CAUTION] > `JWT_SECRET` must be present
+> [!CAUTION]
+> `JWT_SECRET` must be present
 
 `createSession`
 
@@ -54,7 +55,8 @@ export async function signup(user: User) {
 }
 ```
 
-> [!IMPORTANT] > `expiresAfter` must be same at places, recommended to keep in constants
+> [!IMPORTANT]
+>  `expiresAfter` must be same at places, recommended to keep in constants
 
 `clearSession`
 
