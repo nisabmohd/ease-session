@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ease-session/auth": "npm:@jsr/ease-session__auth@^0.2.3",
+    "@ease-session/auth": "npm:@jsr/ease-session__auth@^0.2.6",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18"
