@@ -6,10 +6,16 @@ import bcrypt from "bcryptjs";
 const haveAddedEnvSecret = !!process.env.JWT_SECRET;
 const JWTSECRET = new TextEncoder().encode(process.env.JWT_SECRET!);
 
+/**
+ * Represents a user object with an email address.
+ */
 export type User = {
   email: string;
 };
 
+/**
+ * Represents a user session object containing user details and expiration date.
+ */
 export type UserSession = { user: User } & { expires: Date };
 
 async function encrypt(payload: UserSession) {
@@ -34,6 +40,9 @@ async function decrypt(sessionToken: string): Promise<UserSession | null> {
   }
 }
 
+/**
+ * Specifies options for session management.
+ */
 export type sessionOptions = {
   expiresAfter: number; // ms
 };
