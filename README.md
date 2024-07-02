@@ -2,6 +2,15 @@
 
 ### usage:
 
+Initially add the `JWT_SECRET` key in `.env` file
+
+```
+// .env
+JWT_SECRET = xyz
+```
+
+> [!CAUTION] > `JWT_SECRET` must be present
+
 `createSession`
 
 ```ts
@@ -44,6 +53,8 @@ export async function signup(user: User) {
   });
 }
 ```
+
+> [!IMPORTANT] > `expiresAfter` must be same at places, recommended to keep in constants
 
 `clearSession`
 
