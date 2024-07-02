@@ -1,4 +1,4 @@
-`ease-session` is a lightweight NextJs library for managing user sessions, authentication, and storage.
+`ease-session` is a simple and efficient session management library for Next.js, designed to streamline authentication and session handling with minimal setup.
 
 ### usage:
 
@@ -8,12 +8,13 @@
 // lib/auth.ts
 
 "use server";
-// ...
 
 import { createSession, verifyPassword } from "@ease-session/auth";
 
+// ...
+
 export async function login(user: User) {
-  const dbuser = findUserFromDb(user.email);
+  const dbuser = await findUserFromDb(user.email);
   if (!dbuser) throw new Error("user doesnt exist");
   const { password, ...rest } = user;
   const correct = verifyPassword(password, dbuser.password);
@@ -28,15 +29,16 @@ export async function login(user: User) {
 // lib/auth.ts
 
 "use server";
-// ...
 
 import { createSession, hashPassword } from "@ease-session/auth";
 
+// ...
+
 export async function signup(user: User) {
-  const dbuser = findUserFromDb(user.email);
+  const dbuser = await findUserFromDb(user.email);
   if (dbuser) throw new Error("user already exist");
   const { password, ...rest } = user;
-  await createUser({ ...rest, password: hashPassword(password) });
+  await createDbUser({ ...rest, password: hashPassword(password) });
   await createSession(rest, {
     expiresAfter: 10,
   });
@@ -49,9 +51,10 @@ export async function signup(user: User) {
 // lib/auth.ts
 
 "use server";
-// ...
 
 import { clearSession } from "@ease-session/auth";
+
+// ...
 
 export async function logout() {
   await clearSession();
@@ -68,7 +71,7 @@ import { getSession } from "@ease-session/auth";
 export default async function Page() {
   const session = await getSession();
   if (!session) redirect("/login");
-  return <></>;
+  return <div>{JSON.stringify(session)}<div/>;
 }
 ```
 
