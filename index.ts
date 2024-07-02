@@ -12,11 +12,9 @@ function getEnvJwtSecret() {
 }
 
 /**
- * Represents a user object with an email address.
+ * Represents a user object.
  */
-export type User = {
-  email: string;
-};
+export type User = Record<string, unknown>;
 
 /**
  * Represents a user session object containing user details and expiration date.
