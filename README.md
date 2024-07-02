@@ -18,7 +18,9 @@ export async function login(user: User) {
   const { password, ...rest } = user;
   const correct = verifyPassword(password, dbuser.password);
   if (!correct) throw new Error("invalid credentials");
-  await createSession(rest);
+  await createSession(rest, {
+    expiresAfter: 10,
+  });
 }
 ```
 
@@ -35,7 +37,9 @@ export async function signup(user: User) {
   if (dbuser) throw new Error("user already exist");
   const { password, ...rest } = user;
   await createUser({ ...rest, password: hashPassword(password) });
-  await createSession(rest);
+  await createSession(rest, {
+    expiresAfter: 10,
+  });
 }
 ```
 
@@ -87,7 +91,9 @@ export default async function GET() {
 
 import { updateSession } from "@ease-session/auth";
 
-export async function middleware() {
-  return await updateSession();
+export async function middleware(req) {
+  return await updateSession(req, {
+    expiresAfter: 10,
+  });
 }
 ```
