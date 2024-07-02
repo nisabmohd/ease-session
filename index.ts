@@ -2,11 +2,12 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers.js";
 import { NextRequest, NextResponse } from "next/server.js";
 import bcrypt from "bcryptjs";
+import "dotenv/config";
 
 function getEnvJwtSecret() {
   const haveAddedEnvSecret = !!process.env.JWT_SECRET;
   if (haveAddedEnvSecret) {
-    throw new Error("`JWT_SECRET` key not found in env config");
+    throw new Error("`JWT_SECRET` key not found in .env file");
   }
   return new TextEncoder().encode(process.env.JWT_SECRET!);
 }
@@ -59,10 +60,9 @@ export type sessionOptions = {
  * @throws Throws an error if JWT_SECRET environment variable is not set.
  */
 export async function createSession(user: User, options: sessionOptions) {
-  const userData = user;
   const { expiresAfter } = options;
   const expires = new Date(Date.now() + expiresAfter * 1000);
-  const session = await encrypt({ user: userData, expires });
+  const session = await encrypt({ user, expires });
 
   cookies().set("session", session, { expires, httpOnly: true });
 }

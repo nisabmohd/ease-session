@@ -1,6 +1,6 @@
 {
   "name": "ease-session",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "main": "index.ts",
   "type": "module",
   "keywords": [
@@ -19,6 +19,7 @@
   "description": "A simple and efficient session management library for Next.js, designed to streamline authentication and session handling with minimal setup.",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
     "jose": "^5.6.2",
     "next": "^14.2.4"
   },
